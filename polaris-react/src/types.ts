@@ -1,9 +1,9 @@
 import type React from 'react';
 
 /* eslint-disable @shopify/strict-component-boundaries */
-import type {AvatarProps} from './components/Avatar';
-import type {IconProps} from './components/Icon';
-import type {ThumbnailProps} from './components/Thumbnail';
+import type { AvatarProps } from './components/Avatar';
+import type { IconProps } from './components/Icon';
+import type { ThumbnailProps } from './components/Thumbnail';
 /* eslint-enable @shopify/strict-component-boundaries */
 
 export type Entry<T> = [keyof T, T[keyof T]];
@@ -149,13 +149,14 @@ export interface BaseCallbackAction {
   onAction(): void;
 }
 
-export interface CallbackAction extends BaseCallbackAction {}
+export interface CallbackAction extends BaseCallbackAction { }
 
 export interface DisableableAction extends Action {
   /** Whether or not the action is disabled */
   disabled?: boolean;
 }
 
+/** @deprecated Use ComplexAction with variant and tone props instead. **/
 export interface DestructableAction extends Action {
   /** Destructive action */
   destructive?: boolean;
@@ -171,11 +172,13 @@ export interface LoadableAction extends Action {
   loading?: boolean;
 }
 
+/** @deprecated Use ComplexAction with variant and tone props instead. **/
 export interface OutlineableAction extends Action {
   /** Should action be displayed as an outlined button */
   outline?: boolean;
 }
 
+/** @deprecated Use ComplexAction with variant and tone props instead. **/
 export interface PlainAction extends Action {
   /** Should action be displayed as a plain link */
   plain?: boolean;
@@ -188,7 +191,7 @@ export interface TooltipAction {
 
 export interface ActionListItemDescriptor
   extends DisableableAction,
-    DestructableAction {
+  DestructableAction {
   /** Visually hidden text for screen readers */
   accessibilityLabel?: string;
   /** @deprecated Badge component */
@@ -227,12 +230,17 @@ export interface ActionListSection {
 
 export interface ComplexAction
   extends Action,
-    DisableableAction,
-    DestructableAction,
-    IconableAction,
-    OutlineableAction,
-    LoadableAction,
-    PlainAction {}
+  DisableableAction,
+  DestructableAction,
+  IconableAction,
+  OutlineableAction,
+  LoadableAction,
+  PlainAction {
+  /** Defines the variant of the action */
+  variant?: 'plain' | 'primary' | 'tertiary' | 'monochromePlain';
+  /** Defines the tone of the action */
+  tone?: 'success' | 'critical';
+}
 
 export interface MenuActionDescriptor extends ComplexAction, TooltipAction {
   /** Zero-indexed numerical position. Overrides the action's order in the menu */
